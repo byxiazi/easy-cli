@@ -90,13 +90,7 @@ async function create(projectName: string, options: IObj<string>) {
   mergeOptions(options, scriptPrompt)
 
   copyCommonTemps(
-    [
-      '.editorconfig',
-      '.gitignore',
-      '.prettierignore',
-      '.prettierrc',
-      'README.md',
-    ],
+    ['.editorconfig', '.prettierignore', '.prettierrc', 'README.md'],
     path.resolve(__dirname, '..', 'templates'),
     targetDir
   )

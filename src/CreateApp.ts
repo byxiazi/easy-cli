@@ -16,9 +16,14 @@ export default class CreateApp {
   }
 
   init = (isTS: boolean) => {
+    let temp = fs.readFileSync(
+      path.resolve(__dirname, '..', 'templates/.gitignore.tpl'),
+      'utf-8'
+    )
+    this.generator.writeFiles(this.targetDir, {
+      '.gitignore': temp,
+    })
     this.generator.mkdirs(path.join(this.targetDir, 'src'))
-    this.addIndexTemplate(isTS)
-    this.addPkgTemplate(isTS)
 
     if (isTS) {
       this.addTSTemplate()
@@ -35,12 +40,14 @@ export default class CreateApp {
   }
 
   addJSTemplate = () => {
+    this.addIndexTemplate(false)
+    this.addPkgTemplate(false)
+    this.addWebpackTemplate()
     this.copyTemplates(
       ['.eslintignore', '.eslintrc.js'],
       path.resolve(__dirname, '..', 'templates'),
       this.targetDir
     )
-    this.addWebpackTemplate()
   }
 
   addWebpackTemplate = () => {
@@ -65,6 +72,8 @@ export default class CreateApp {
   }
 
   addTSTemplate = () => {
+    this.addIndexTemplate(true)
+    this.addPkgTemplate(true)
     this.copyTemplates(
       ['tsconfig.json', 'tslint.json'],
       path.resolve(__dirname, '..', 'templates'),
