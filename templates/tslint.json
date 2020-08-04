@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "no-floating-promises": false,
+    "quotemark": [true, "single", "jsx-double"]
+  },
+  "extends": [
+    "tslint-config-standard",
+    "tslint-config-prettier"
+  ]
+}
