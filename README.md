@@ -1,15 +1,15 @@
-# easy-cli
+# easy-library-cli
 
-**easy-cli** Awesome CLI that makes creating a npm library extremely easy.
+**easy-library-cli** Awesome CLI that makes creating a npm library extremely easy.
 
-easy-cli is:
+easy-library-cli is:
 
 - Easy - just one line of commands.
 - Powerful - you can choose `javasrcipt` or `typescript` to start a new npm project
 
 ## Installation
 
-    $ npm install -g easy-cli
+    $ npm install -g easy-library-cli
 
 ## Usage
 
