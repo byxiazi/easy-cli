@@ -1,5 +1,5 @@
 {
-  "name": "easy-cli",
+  "name": "easy-library-cli",
   "version": "0.1.0",
   "description": "Awesome CLI that makes creating a npm library extremely easy.",
   "scripts": {
