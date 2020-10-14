@@ -1,6 +1,6 @@
 {
   "name": "npm-library-cli",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Awesome CLI that makes creating a npm library extremely easy.",
   "scripts": {
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
