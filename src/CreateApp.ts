@@ -2,6 +2,7 @@ import path from 'path'
 import fs from 'fs'
 import Mustache from 'mustache'
 import Generator from './Generator'
+import { gitInit } from './shell'
 import { IObj } from './index'
 import { deepMerge } from './utils'
 
@@ -16,6 +17,11 @@ export default class CreateApp {
   }
 
   init = (isTS: boolean) => {
+    const srcPath = path.join(this.targetDir, 'src')
+    const scriptsPath = path.join(this.targetDir, 'scripts')
+    this.generator.mkdirs(srcPath)
+    this.generator.mkdirs(scriptsPath)
+
     let temp = fs.readFileSync(
       path.resolve(__dirname, '..', 'templates/.gitignore.tpl'),
       'utf-8'
@@ -23,7 +29,18 @@ export default class CreateApp {
     this.generator.writeFiles(this.targetDir, {
       '.gitignore': temp,
     })
-    this.generator.mkdirs(path.join(this.targetDir, 'src'))
+    this.generator.copyFiles(
+      {
+        verifyCommitMsg: path.resolve(
+          __dirname,
+          '..',
+          'templates/verify-commit-msg.js'
+        ),
+      },
+      {
+        verifyCommitMsg: path.join(scriptsPath, 'verify-commit-msg.js'),
+      }
+    )
 
     if (isTS) {
       this.addTSTemplate()
@@ -120,5 +137,10 @@ export default class CreateApp {
       isTS = false
     }
     this.init(isTS)
+    this.afterCreated()
+  }
+
+  afterCreated() {
+    gitInit(this.targetDir)
   }
 }
